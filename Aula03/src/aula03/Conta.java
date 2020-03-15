@@ -6,65 +6,96 @@ public class Conta {
     private double saldo;
     private double limite;
     private boolean status;
-    protected boolean tipo;
+    protected String tipo;
 
+    
     public Conta() {
-        this.saldo = 0;
-        this.status = false;
+        this.setSaldo(0);
+        this.setStatus(false);
     
     }
-    public void openAccount(){
-        setTipo(t);
-        setStatus(true);
+    public void state(){
+        System.out.println("#####################################################");
+        System.out.println("Número: "+this.getNum_conta()+"\nNome: "+this.getNome()+"\nSaldo: "
+        +this.getSaldo()+"\nStatus: "+this.getStatus()+"\nTipo: "+this.getTipo());
+
+    }
+    public void openAccount(String t){
+        this.setTipo(t);
+        this.setStatus(true);
         if (t == "CC")
-            this.saldo = 50;
+            this.setSaldo(50);
         else if (t == "CP")
-            setSaldo(150);
-            
+            this.setSaldo(150);
+        System.out.println("Conta aberta com Sucesso!");
+        
     }
     public void closedAccount(){
-        if (this.saldo > 0)
+        if (this.getSaldo() > 0)
             System.out.println("Your account have money!!!");
-        else if (this.saldo < 0)
+        else if (this.getSaldo() < 0)
             System.out.println("Your account dont have money!!!");
+        else{
+            this.setStatus(false);
+            System.out.println("Conta fechada com sucesso!");
+        
+        }
+    }
+    public void depositar(double v){
+        if(this.getStatus() == true){
+            this.setSaldo(this.getSaldo() + v);
+            System.out.println("Deposito relaizado com sucesso na conta de" + this.getNome());
+        }else
+            System.out.println("Impossivel depositar!");
+
+    }
+    public void sacar(double v){
+        if (this.getStatus() == true)
+            if(this.getSaldo() >= v)
+                this.setSaldo(this.getSaldo() - v);
+            else
+                System.out.println("Saldo insuficiente!");
         else
-            setStatus(false);
-    }
-    public void depositar(){
-
-
-    }
-    public void sacar(){
-
+            System.out.println("Impossivel sacar!");
 
     }
     public void pagarConta(){
+        float v = 0;
+        if(this.getTipo() == "CC")
+            v = 12;
+        else if(this.getTipo() == "CP")
+            v = 20;
 
-
-    }
-    public int getNum_conta() {
-        return num_conta;
-
+        if (this.getStatus()){
+            this.setSaldo(this.getSaldo() - v);
+            System.out.println("Mensalidade paga com sucesso por "+this.getNome());
+        }else                
+            System.out.println("Impossivel pagar uma conta fechada!");
+    
     }
     public void setNum_conta(int num_conta) {
         this.num_conta = num_conta;
     
     }
-    public String getNome() {
-        return nome;
+    public int getNum_conta() {
+        return num_conta;
 
     }
     public void setNome(String nome) {
         this.nome = nome;
     
     }
-    public void corrente() {
-        this.tipo = false;
+    public String getNome() {
+        return nome;
 
     }
-    public void corrent() {
-        this.tipo = true;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     
+    }
+    public String getTipo() {
+        return tipo;
+
     }
     public void setStatus(boolean status){
         this.status = status;
