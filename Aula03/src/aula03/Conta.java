@@ -44,7 +44,7 @@ public class Conta {
     public void depositar(double v){
         if(this.getStatus() == true){
             this.setSaldo(this.getSaldo() + v);
-            System.out.println("Deposito relaizado com sucesso na conta de" + this.getNome());
+            System.out.println("Deposito relaizado com sucesso na conta de " + this.getNome());
         }else
             System.out.println("Impossivel depositar!");
 
